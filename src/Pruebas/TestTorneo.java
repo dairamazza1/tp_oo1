@@ -1,9 +1,11 @@
 package Pruebas;
 
+import Torneo.Torneo;
+
 public class TestTorneo {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		Torneo torneo = new Torneo("nombre", "temporada", 2, null, null);
 
 	}
 
