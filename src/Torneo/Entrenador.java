@@ -7,15 +7,15 @@ public class Entrenador {
 	private String nombre;
 	private String apellido;
 	private String estrategiafavorita;
-	private LocalDate Fecha;
+	private LocalDate fechadeDeNacimiento;
 	
-	public Entrenador(int dni, String nombre, String apellido, String estrategiafavorita, LocalDate fecha) {
+	public Entrenador(int dni, String nombre, String apellido, String estrategiafavorita, LocalDate fechadeDeNacimiento) {
 		
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.estrategiafavorita = estrategiafavorita;
-		Fecha = fecha;
+		this.fechadeDeNacimiento = fechadeDeNacimiento;
 	}
 
 	public int getDni() {
@@ -50,17 +50,17 @@ public class Entrenador {
 		this.estrategiafavorita = estrategiafavorita;
 	}
 
-	public LocalDate getFecha() {
-		return Fecha;
+	public LocalDate getfechadeDeNacimiento() {
+		return fechadeDeNacimiento;
 	}
 
-	public void setFecha(LocalDate fecha) {
-		Fecha = fecha;
+	public void setfechadeDeNacimiento(LocalDate fechadeDeNacimiento) {
+		this.fechadeDeNacimiento = fechadeDeNacimiento;
 	}
 
 	public String toString() {
-		return "Entrenador [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", estrategiafavorita="
-				+ estrategiafavorita + ", Fecha=" + Fecha + "]";
+		return "\nEntrenador: " + nombre + "\n apellido: " + apellido + "\n Dni: " + dni + "\n estrategia favorita: "+ estrategiafavorita +" \nfecha de nacimiento: "+ fechadeDeNacimiento + "";
+
 	}
 	
 	public boolean equals(Entrenador entrenador) {

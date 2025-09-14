@@ -4,13 +4,13 @@ import java.time.*;
 public class Jugador {
 	private int dni;
 	private float estatura;
-	private String posicion;
+	private int posicion;
 	private int numeroCamiseta;
 	private String apellido;
 	private String nombre;
 	private LocalDate fechaDeNacimiento;
 	 
-	public Jugador(int dni, Float estatura, String posicion, int numeroCamiseta, String apellido, String nombre, LocalDate fechaDeNacimiento) {
+	public Jugador(int dni, float estatura, int posicion, int numeroCamiseta, String nombre, String apellido, LocalDate fechaDeNacimiento) {
 		this.dni=dni;
 		this.estatura=estatura;
 		this.posicion=posicion;
@@ -37,11 +37,11 @@ public class Jugador {
 		this.estatura = estatura;
 	}
 
-	public String getPosicion() {
+	public int getPosicion() {
 		return posicion;
 	}
 
-	public void setPosicion(String posicion) {
+	public void setPosicion(int posicion) {
 		this.posicion = posicion;
 	}
 
