@@ -1,6 +1,7 @@
 package Torneo;
 
 import java.util.List;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Equipo {
@@ -8,14 +9,16 @@ public class Equipo {
 	private String nombre;
 	private Entrenador entrenador;
 	private List<Jugador> listaJugadores; //***** se crea una lista de jugadores
+	private LocalDate fechaDeFundacion; 
 	
 	
 	
-	public Equipo(String nombre, Entrenador entrenador) {  // [DM] Faltaba crear el constructor
+	public Equipo(String nombre, Entrenador entrenador, LocalDate fechaDeFundacion) {  // [DM] Faltaba crear el constructor
 		this.nombre = nombre;
 		this.entrenador = entrenador;
 		//this.listaJugadores = listaJugadores;
 		this.listaJugadores = new ArrayList<Jugador>();  //***** se unicializa un array de lista de elementos de tipo jugador
+		this.fechaDeFundacion=fechaDeFundacion;
 	}
 
 	public void setNombre(String nombre) {
@@ -117,5 +120,15 @@ public class Equipo {
 		
 		return listaJugadores.remove(j);
 	}
+
+	public LocalDate getFechaDeFundacion() {
+		return fechaDeFundacion;
+	}
+
+	public void setFechaDeFundacion(LocalDate fechaDeFundacion) {
+		this.fechaDeFundacion = fechaDeFundacion;
+	}
+	
+	
 	
 }
