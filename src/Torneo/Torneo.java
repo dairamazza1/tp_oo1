@@ -168,6 +168,56 @@ public class Torneo {
 		}
 		//agegar excepción
 		return false;
+	} 
+	
+	
+	public List<Jugador> obternerJugadorEntreFechasDeNac( LocalDate fechaDesde, LocalDate fechaHasta){
+		List<Jugador> listaJugadores = new ArrayList<>();
+		for(Equipo equipo : this.listaEquipos) {
+			for(Jugador jugador : equipo.getListaJugadores()) {
+				LocalDate fechaNacimiento = jugador.getFechaDeNacimiento();
+				if ((fechaNacimiento.isEqual(fechaDesde) || fechaNacimiento.isAfter(fechaDesde)) &&
+					    (fechaNacimiento.isEqual(fechaHasta) || fechaNacimiento.isBefore(fechaHasta))) {
+					    listaJugadores.add(jugador);
+					}
+			}
+		}
+		return listaJugadores;
+	}
+	
+	public List<Equipo> obtenerEquiposPorFechaDeFundacion(LocalDate fechaEspecifica){
+		List<Equipo> listaEquipo = new ArrayList<>();
+		for (Equipo equipo : this.listaEquipos) {
+			LocalDate fechaFundacion = equipo.getFechaDeFundacion();
+			if(fechaFundacion.isBefore(fechaEspecifica)) {
+				listaEquipo.add(equipo);
+			}
+		}
+		return listaEquipo;
+	}
+	
+	public float alturaPromediaDeEquipo(Equipo equipo) {
+		float promedio=0;
+		int contador=0;
+			for(Jugador jugador : equipo.getListaJugadores()) {
+				promedio+=jugador.getEstatura();
+				contador++;
+			}
+		return promedio/contador;
+	}
+	
+	public Equipo equipoMayorPromedioDeAltura(List<Equipo> equipos) {
+		Equipo mayorEquipo = null;
+		float mayorPromedio=0;
+		for(Equipo equipo : equipos) {
+			float promedio=alturaPromediaDeEquipo(equipo);
+			if(promedio>mayorPromedio){
+				mayorPromedio=promedio;
+				mayorEquipo=equipo;
+			}
+			
+		}
+		return mayorEquipo;
 	}
 	
 }

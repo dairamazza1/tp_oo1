@@ -1,6 +1,7 @@
 package Torneo;
 import java.time.*;
 
+
 public class Jugador {
 	private int dni;
 	private float estatura;
@@ -9,6 +10,7 @@ public class Jugador {
 	private String apellido;
 	private String nombre;
 	private LocalDate fechaDeNacimiento;
+	
 	 
 	public Jugador(int dni, float estatura, int posicion, int numeroCamiseta, String nombre, String apellido, LocalDate fechaDeNacimiento) {
 		this.dni=dni;
@@ -88,6 +90,7 @@ public class Jugador {
 				" posicion: "+posicion+" numero de camiseta "+numeroCamiseta+
 				" fecha de nacimiento: "+ fechaDeNacimiento);
 	}
-
+	
+	
 	
 }
