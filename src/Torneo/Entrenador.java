@@ -2,46 +2,17 @@ package Torneo;
 
 import java.time.*;
 
-public class Entrenador {
-	private int dni;
-	private String nombre;
-	private String apellido;
+public class Entrenador extends Persona{
+	
 	private String estrategiafavorita;
-	private LocalDate fechadeDeNacimiento;
 	
 	public Entrenador(int dni, String nombre, String apellido, String estrategiafavorita, LocalDate fechadeDeNacimiento) {
-		
-		this.dni = dni;
-		this.nombre = nombre;
-		this.apellido = apellido;
+		super(dni, apellido, nombre, fechadeDeNacimiento);
+	
 		this.estrategiafavorita = estrategiafavorita;
-		this.fechadeDeNacimiento = fechadeDeNacimiento;
 	}
 
-	public int getDni() {
-		return dni;
-	}
-
-	public void setDni(int dni) {
-		this.dni = dni;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getApellido() {
-		return apellido;
-	}
-
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-
+	
 	public String getEstrategiafavorita() {
 		return estrategiafavorita;
 	}
@@ -50,24 +21,16 @@ public class Entrenador {
 		this.estrategiafavorita = estrategiafavorita;
 	}
 
-	public LocalDate getfechadeDeNacimiento() {
-		return fechadeDeNacimiento;
-	}
+		
 
-	public void setfechadeDeNacimiento(LocalDate fechadeDeNacimiento) {
-		this.fechadeDeNacimiento = fechadeDeNacimiento;
-	}
-
-	
-	
 	@Override
 	public String toString() {
-		return "\nEntrenador [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", estrategiafavorita="
-				+ estrategiafavorita + ", fechadeDeNacimiento=" + fechadeDeNacimiento + "]";
+		return "Entrenador [estrategiafavorita=" + estrategiafavorita + ", toString()=" + super.toString() + "]";
 	}
 
-	public boolean equals(Entrenador entrenador) {
-		return ((this.dni == entrenador.getDni()));
-	}
+//  Sorbrecarga => q compare el equals del padre
+//	public boolean equals(Entrenador entrenador) {
+//		return ((this.getDni() == entrenador.getDni()));
+//	}
 	
 }
