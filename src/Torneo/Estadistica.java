@@ -57,7 +57,7 @@ public class Estadistica {
 
 	@Override
 	public String toString() {
-		return "Estadistica [cantidadGoles=" + cantidadGoles + ", asistencias=" + asistencias + ", minJugadores="
+		return "\nEstadistica [cantidadGoles=" + cantidadGoles + ", asistencias=" + asistencias + ", minJugadores="
 				+ minJugadores + "]";
 	}
 	

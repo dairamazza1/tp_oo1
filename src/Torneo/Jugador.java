@@ -80,14 +80,16 @@ public class Jugador {
 	public boolean equals(Jugador jugador) {
 		return((this.dni==jugador.getDni()));
 	}
-	
+
+
 	@Override
-	public String toString(){
-		return("Nombre: "+nombre+" apellido: "+apellido+
-				"dni: "+dni+" estatura: "+estatura+
-				" posicion: "+posicion+" numero de camiseta "+numeroCamiseta+
-				" fecha de nacimiento: "+ fechaDeNacimiento);
+	public String toString() {
+		return "\nJugador [dni=" + dni + ", estatura=" + estatura + ", posicion=" + posicion + ", numeroCamiseta="
+				+ numeroCamiseta + ", apellido=" + apellido + ", nombre=" + nombre + ", fechaDeNacimiento="
+				+ fechaDeNacimiento + "]";
 	}
+	
+	
 
 	
 }

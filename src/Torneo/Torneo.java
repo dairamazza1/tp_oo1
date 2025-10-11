@@ -8,7 +8,7 @@ public class Torneo {
 	private int id;
 	private String nombre;
 	private String temporada;
-	private List<Equipo> listaEquipos;
+	private List<Partido> lstPartidos; //partidos que se jugaron en el torneo
 	private LocalDate fechInicio;
 	private LocalDate fechaFinal;
 	
@@ -21,7 +21,7 @@ public class Torneo {
 		this.fechInicio = fechInicio;
 		this.fechaFinal = fechaFinal;
 		
-		this.listaEquipos = new ArrayList<Equipo>();
+		this.lstPartidos = new ArrayList<Partido>();
 	}
 
 
@@ -43,11 +43,10 @@ public class Torneo {
 	}
 
 
-
-	public List<Equipo> getEquipo() {
-		return listaEquipos;
+	
+	public List<Partido> getlstPartido() {
+		return lstPartidos;
 	}
-
 
 
 	public LocalDate getFechInicio() {
@@ -96,8 +95,8 @@ public class Torneo {
 
 	@Override
 	public String toString() {
-		return "Torneo: "+nombre +" \nid=" + id + 
-				", \ntemporada=" + temporada + ", \nfechInicio=" + fechInicio + ", \nfechaFinal=" + fechaFinal + ", \n" + listaEquipos ;
+		return "\nTorneo [id=" + id + ", nombre=" + nombre + ", temporada=" + temporada + ", lstPartidos="
+				+ lstPartidos + ", fechInicio=" + fechInicio + ", fechaFinal=" + fechaFinal + "]";
 	}
 
 
@@ -108,66 +107,83 @@ public class Torneo {
 	
 	
 	//Métodos CU
-	public Equipo traerEquipo(int codUnico) {
-		int i = 0;
-		boolean found = false;
-		Equipo e = null;
-		
-		while(i < listaEquipos.size() && !found) {
-			if(listaEquipos.get(i).getCodUnico() == codUnico) {
-				found = true;
-				e = listaEquipos.get(i);
-			}
-			i ++;
-		}
-		
-		return e;
-	}
-	
-	public boolean agregarEquipo(Equipo e) {
-		//pre cond: validar que el nombre no exista en la lista	
-		//post cond: agregar el equipo con un cod único
-		
+
+	public boolean agregarPartido(LocalDate fecha, Equipo local,Equipo visitante,Estadio estadio) throws Exception {
 		int i = 0;
 		boolean found = false;
 		
-		while(i < listaEquipos.size() && !found) {
-			if(!found && listaEquipos.get(i).getNombre().equalsIgnoreCase(e.getNombre())) {
+		while(i<lstPartidos.size() && !found) {
+			if(lstPartidos.get(i).getFecha().isEqual(fecha) && lstPartidos.get(i).getEstadio().equals(estadio)) {
 				found = true;
 			}
 			i++;
 		}
-		
 		if(!found) {
-			int codUnico = 0;
-			if(listaEquipos.size() > 0) {
-				//agrego codUnico+1 en el útimo elemento de la lista
-				codUnico = listaEquipos.get(listaEquipos.size() - 1).getCodUnico() + 1;				
+			return lstPartidos.add(new Partido(fecha, local, visitante, estadio));
+		}else {
+			throw new Exception("El partido ya existe");
+		}
+	}
+	
+	public Partido traerPartido(LocalDate fecha, Estadio estadio) {
+		int i = 0;
+		boolean found = false;
+		Partido p = null;
+		
+		while(i < lstPartidos.size() && !found) {
+			if(lstPartidos.get(i).getEstadio().equals(estadio) && lstPartidos.get(i).getFecha().isEqual(fecha)) {
+				found = true;
+				p = lstPartidos.get(i);
 			}
-			e.setCodUnico(codUnico);
+			i ++;
+		}
+		
+		return p;
+	}
+	
+	
+	public boolean eliminarPartido(LocalDate fecha, Estadio estadio)  throws Exception {
+		Partido pFound = traerPartido(fecha, estadio);
+		
+		if(pFound != null) {
+			return lstPartidos.remove(pFound);
+		}else {
+			throw new Exception("No se pudo eliminar el partido");
+		}
+	}
+	
+	
+	//9 Identificación de equipo con mayor altura promedio: Crear un método que devuelva
+	//el objeto Equipo con la mayor altura promedio en el torneo
+	
+	//pd:  no me queda otra q recorrer los partidos para obtener los equipos xq torneo no tiene equipos ¯\_(ツ)_/¯
+		public Equipo equipoConMasEstatura() {
+						
+			List<Equipo> lstEquiposDeltorneo = new ArrayList<Equipo>();
 			
-			return listaEquipos.add(e);
+			for (Partido partido : lstPartidos) {
+				if(lstEquiposDeltorneo.contains(partido.getLocal()) == false) { //agregar si no existe en la lst
+					lstEquiposDeltorneo.add(partido.getLocal());		
+				}
+				if(lstEquiposDeltorneo.contains(partido.getVisitante()) == false) { //agregar si no existe en la lst
+					lstEquiposDeltorneo.add(partido.getVisitante());	
+				}
+			}
+			
+			 Equipo equipoConMasAltura = null;
+			    float maxPromedio = (float) 0.0;
+
+			    for (Equipo equipo : lstEquiposDeltorneo) {
+			        float promedio = equipo.estaturaPromedioEquipo();
+			        if (equipoConMasAltura == null || promedio > maxPromedio) {
+			            maxPromedio = promedio;
+			            equipoConMasAltura = equipo;
+			        }
+			    }
+			
+			return equipoConMasAltura;
 		}
-		//agregar excepcion
-		return false;
-	}
-	
-	public void modificarEquipo(int codUnico, String nombre) {
-		Equipo equipoFound = traerEquipo(codUnico);
-		
-		if(equipoFound != null) {
-			equipoFound.setNombre(nombre);
-		}
-	}
-	
-	public boolean eliminarEquipo(int codUnico) {
-		Equipo equipoFound = traerEquipo(codUnico);
-		
-		if(equipoFound != null) {
-			listaEquipos.remove(equipoFound);
-		}
-		//agegar excepción
-		return false;
-	}
+
+
 	
 }
