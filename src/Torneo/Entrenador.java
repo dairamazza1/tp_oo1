@@ -58,11 +58,14 @@ public class Entrenador {
 		this.fechadeDeNacimiento = fechadeDeNacimiento;
 	}
 
-	public String toString() {
-		return "\nEntrenador: " + nombre + "\n apellido: " + apellido + "\n Dni: " + dni + "\n estrategia favorita: "+ estrategiafavorita +" \nfecha de nacimiento: "+ fechadeDeNacimiento + "";
-
-	}
 	
+	
+	@Override
+	public String toString() {
+		return "\nEntrenador [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", estrategiafavorita="
+				+ estrategiafavorita + ", fechadeDeNacimiento=" + fechadeDeNacimiento + "]";
+	}
+
 	public boolean equals(Entrenador entrenador) {
 		return ((this.dni == entrenador.getDni()));
 	}

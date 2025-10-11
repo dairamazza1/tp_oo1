@@ -40,13 +40,15 @@ public class Estadio {
 		this.direccion=direccion;
 	}
 	
-	@Override
-	public String toString(){
-		return "ESTADIO: "+ nombre +"\nCapacidad: "+capacidad+"\nDireccion: "+direccion;
-	}
+	
 	
 	//agregar equals
 	
+	@Override
+	public String toString() {
+		return "\nEstadio [nombre=" + nombre + ", capacidad=" + capacidad + ", direccion=" + direccion + "]";
+	}
+
 	public boolean equals(Estadio estadio) {
 		return this.nombre == estadio.getNombre();
 	}

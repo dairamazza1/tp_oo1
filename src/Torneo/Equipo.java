@@ -11,9 +11,10 @@ public class Equipo {
 	
 	
 	
-	public Equipo(String nombre, Entrenador entrenador) {  // [DM] Faltaba crear el constructor
+	public Equipo(int codUnico, String nombre) {  // [DM] Faltaba crear el constructor
+		this.codUnico = codUnico;
 		this.nombre = nombre;
-		this.entrenador = entrenador;
+		this.entrenador = null;  //se asigna luego
 		//this.listaJugadores = listaJugadores;
 		this.listaJugadores = new ArrayList<Jugador>();  //***** se unicializa un array de lista de elementos de tipo jugador
 	}
@@ -50,10 +51,12 @@ public class Equipo {
 	}
 
 
+	
+
 	@Override
 	public String toString() {
-		return "Equipo: \ncodUnico=" + codUnico + ", \nnombre=" + nombre + ", \n" + entrenador
-				+ ", \nlistaJugadores=" + listaJugadores + "]";
+		return "\nEquipo [codUnico=" + codUnico + ", nombre=" + nombre + ", entrenador=" + entrenador
+				+ ", listaJugadores=" + listaJugadores + "]";
 	}
 
 	public boolean equals(Equipo equipo) {
@@ -118,4 +121,19 @@ public class Equipo {
 		return listaJugadores.remove(j);
 	}
 	
+	
+	
+	//8. Cálculo de altura promedio de equipo: Escribir un método que calcule y retorne la
+	//altura promedio de un equipo.
+	
+	public float estaturaPromedioEquipo() {
+		float altura = (float) 0.0;	
+		int count = 0;
+		for (Jugador jugador : listaJugadores) {
+			altura = altura + jugador.getEstatura();
+			count ++;
+		}
+		return (altura / count);
+	}
+
 }
