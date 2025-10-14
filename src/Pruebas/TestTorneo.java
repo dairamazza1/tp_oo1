@@ -129,6 +129,12 @@ public class TestTorneo {
 		System.out.println("\n\t******** 9. Identificación de equipo con mayor altura promedio ********");
 		System.out.println(torneoPlayita.equipoConMasEstatura());
 		
+		System.out.println("\n\t******** 10. Cálculo de puntos de equipo ********");
+		System.out.println("El equipo "+sistema.traerEquipo("rojo").getNombre()+" obtuvo: "+torneoPlayita.totalDePuntosDeUnEquipo(sistema.traerEquipo("rojo"))+" puntos");
+        
+		System.out.println("\n\t******** 11. Generación de tabla de posiciones ********");
+		System.out.println("Tabla de posiciones");
+		System.out.println(sistema.crearTablaDePosicion(torneoPlayita));
 	}
 
 }

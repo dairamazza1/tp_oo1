@@ -3,6 +3,7 @@ package Torneo;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
 
 public class Sistema {
 	private  List<Torneo> lstTorneos;
@@ -287,6 +288,19 @@ public boolean agregarTorneo(String nombre, String temporada, LocalDate fechInic
 		//agrego fecha de fundación en la clase equipo?
 		
 		
-
+		/*11. Generación de tabla de posiciones: Desarrollar un método que retorne una lista de 
+			  (Posicion,  no se persiste es solo para generar reporte) que contenga equipo y puntaje, 
+			  ordenada de mayor a menor puntaje (utilizando ordenamiento de listas nativo o 
+		 	  desarrollando el algoritmo de algún método de ordenamiento).
+		 */
 	
+		public List<Posicion> crearTablaDePosicion(Torneo torneo){
+			List<Posicion> tablaDePosiciones = new ArrayList<Posicion>();
+			for(Equipo e : lstEquipos) {
+				int puntos = torneo.totalDePuntosDeUnEquipo(e);
+				tablaDePosiciones.add(new Posicion(e,puntos));
+			}
+			tablaDePosiciones.sort((p1,p2)->Integer.compare(p2.getPuntaje(), p1.getPuntaje()));
+			return tablaDePosiciones;
+		}
 }

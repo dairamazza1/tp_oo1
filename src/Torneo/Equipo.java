@@ -58,6 +58,8 @@ public class Equipo {
 		return "\nEquipo [codUnico=" + codUnico + ", nombre=" + nombre + ", entrenador=" + entrenador
 				+ ", listaJugadores=" + listaJugadores + "]";
 	}
+	
+	
 
 	public boolean equals(Equipo equipo) {
 			return this.codUnico == equipo.getCodUnico();		

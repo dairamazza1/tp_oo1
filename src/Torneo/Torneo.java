@@ -183,7 +183,32 @@ public class Torneo {
 			
 			return equipoConMasAltura;
 		}
-
-
+		
+		/*
+		 10. Cálculo de puntos de equipo: Implementar un método que calcule y 
+		 	 retorne el total de 
+			 puntos acumulados por un equipo, considerando 3 puntos por victoria
+			 y 1 por empate.   
+		 */
+			
+		public int totalDePuntosDeUnEquipo(Equipo equipo) {
+			int cantidadDePuntos=0;
+			for(Partido p : lstPartidos) {
+				if(equipo.equals(p.getLocal())) {
+					if(p.getGolesLocal()>p.getGolesVisitante()) {
+						cantidadDePuntos+=3;
+					}else if(p.getGolesLocal()==p.getGolesVisitante()) {
+						cantidadDePuntos+=1;
+					}
+				}else if(equipo.equals(p.getVisitante())) {
+					if(p.getGolesVisitante()>p.getGolesLocal()) {
+						cantidadDePuntos+=3;
+					}else if(p.getGolesLocal()==p.getGolesVisitante()) {
+						cantidadDePuntos+=1;
+					}
+				}
+			}
+			return cantidadDePuntos;
+		}
 	
 }
