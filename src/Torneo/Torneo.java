@@ -218,8 +218,38 @@ public class Torneo {
 			return equipoConMasAltura;
 		}
 		
+		/*
+		 10. Cálculo de puntos de equipo: Implementar un método que calcule y 
+		 	 retorne el total de 
+			 puntos acumulados por un equipo, considerando 3 puntos por victoria
+			 y 1 por empate.   
+		 */
+			
+		public int totalDePuntosDeUnEquipo(Equipo equipo) {
+			int cantidadDePuntos=0;
+			for(Partido p : lstPartidos) {
+				if(equipo.equals(p.getLocal())) {
+					if(p.getGolesLocal()>p.getGolesVisitante()) {
+						cantidadDePuntos+=3;
+					}else if(p.getGolesLocal()==p.getGolesVisitante()) {
+						cantidadDePuntos+=1;
+					}
+				}else if(equipo.equals(p.getVisitante())) {
+					if(p.getGolesVisitante()>p.getGolesLocal()) {
+						cantidadDePuntos+=3;
+					}else if(p.getGolesLocal()==p.getGolesVisitante()) {
+						cantidadDePuntos+=1;
+					}
+				}
+			}
+			return cantidadDePuntos;
+		}
 		
+		/*
+		12. Cálculo de goles por jugador: Escribir un método que, dado un objeto Jugador,
+		devuelva el total de goles que ha logrado en el torneo
 		
+		*/
 		public int calcularTotalGoles(Jugador jugador) {
 			
 			 if (jugador == null) {
@@ -241,8 +271,12 @@ public class Torneo {
 				
 				return golesTotales;
 			}
+		
+		/*
+		 13. Cálculo de asistencias por jugador: Escribir un método que, dado un objeto Jugador,
+             devuelva el total de asistencias que ha logrado en el torneo.
 
-
+		 */
 		public int calcularTotalAsistencias(Jugador jugador) {
 			
 		 if (jugador == null) {
@@ -266,9 +300,15 @@ public class Torneo {
 		}
 		
 		
+		/*
+		  14. Generación de tabla de goleadores: Crear un método que retorne una lista de
+            (Goleador, no se persiste es solo para generar reporte) con el jugador y los goles,
+            ordenada de mayor a menor (utilizando ordenamiento de listas nativo o desarrollando el
+             algoritmo de algún método de ordenamiento).
+
+		 */
 		
-		
-public List<Goleador> crearTablaGoleadores(){
+        public List<Goleador> crearTablaGoleadores(){
 			
 			List<Goleador> tablaGoleadores = new ArrayList<Goleador>();
 			List<Jugador> listaJugadores = new ArrayList<Jugador>();
@@ -313,6 +353,13 @@ public List<Goleador> crearTablaGoleadores(){
 			
 		}
 		
+        
+        /*
+          15. Generación de tabla de asistidores: Implementar un método que retorne una lista de
+          (Asistencia, no se persiste es solo para generar reporte) con el jugador y sus
+           asistencias, ordenada de mayor a menor (utilizando ordenamiento de listas nativo o
+            desarrollando el algoritmo de algún método de ordenamiento).
+         */
 	
 		public List<Asistidor> crearTablaAsistidores(){
 			

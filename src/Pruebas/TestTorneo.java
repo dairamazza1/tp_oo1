@@ -133,11 +133,17 @@ public class TestTorneo {
 		System.out.println("\n\t******** 9. Identificación de equipo con mayor altura promedio ********");
 		System.out.println(torneoPlayita.equipoConMasEstatura());
 		
+		System.out.println("\n\t******** 10. Cálculo de puntos de equipo ********");
+		System.out.println("El equipo "+sistema.traerEquipo("rojo").getNombre()+" obtuvo: "+torneoPlayita.totalDePuntosDeUnEquipo(sistema.traerEquipo("rojo"))+" puntos");
+        
+		System.out.println("\n\t******** 11. Generación de tabla de posiciones ********");
+		System.out.println("Tabla de posiciones");
+		System.out.println(sistema.crearTablaDePosicion(torneoPlayita));
 		
 		
 		
 		
-		System.out.println("\n\t******** 10. Agregar estadísticas a los partidos ********");
+		System.out.println("\n\t********. Agregar estadísticas a los partidos ********");
 		try {
 		    // Agregar estadísticas para el primer partido (Rojo 2 - Verde 0)
 		    torneoPlayita.agregarEstadistica(0, 2, 90, sistema.traerJugador(123), torneoPlayita.traerPartido(LocalDate.of(2025,1,1), elgalatasay)); // Daira
@@ -222,6 +228,7 @@ public class TestTorneo {
 		}
 		
 		
+
 	}
 
 }
