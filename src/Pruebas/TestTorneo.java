@@ -1,9 +1,13 @@
 package Pruebas;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import Torneo.Asistidor;
 import Torneo.Equipo;
 import Torneo.Estadio;
+import Torneo.Goleador;
+import Torneo.Jugador;
 import Torneo.Sistema;
 import Torneo.Torneo;
 
@@ -128,6 +132,95 @@ public class TestTorneo {
 		
 		System.out.println("\n\t******** 9. Identificación de equipo con mayor altura promedio ********");
 		System.out.println(torneoPlayita.equipoConMasEstatura());
+		
+		
+		
+		
+		
+		System.out.println("\n\t******** 10. Agregar estadísticas a los partidos ********");
+		try {
+		    // Agregar estadísticas para el primer partido (Rojo 2 - Verde 0)
+		    torneoPlayita.agregarEstadistica(0, 2, 90, sistema.traerJugador(123), torneoPlayita.traerPartido(LocalDate.of(2025,1,1), elgalatasay)); // Daira
+		    torneoPlayita.agregarEstadistica(1, 1, 90, sistema.traerJugador(345), torneoPlayita.traerPartido(LocalDate.of(2025,1,1), elgalatasay)); // Pepe
+		    torneoPlayita.agregarEstadistica(0, 0, 90, sistema.traerJugador(678), torneoPlayita.traerPartido(LocalDate.of(2025,1,1), elgalatasay)); // Martin
+		    
+		    // Agregar estadísticas para el segundo partido (Verde 4 - Rojo 2)
+		    torneoPlayita.agregarEstadistica(2, 3, 90, sistema.traerJugador(901), torneoPlayita.traerPartido(LocalDate.of(2025,1,10), boca)); // Diego
+		    torneoPlayita.agregarEstadistica(1, 1, 90, sistema.traerJugador(234), torneoPlayita.traerPartido(LocalDate.of(2025,1,10), boca)); // Juan
+		    torneoPlayita.agregarEstadistica(0, 0, 90, sistema.traerJugador(567), torneoPlayita.traerPartido(LocalDate.of(2025,1,10), boca)); // Homero
+		    
+		    // Agregar estadísticas para el tercer partido (Verde 1 - Rojo 3)
+		    torneoPlayita.agregarEstadistica(1, 2, 90, sistema.traerJugador(901), torneoPlayita.traerPartido(LocalDate.of(2025,1,20), river)); // Diego
+		    torneoPlayita.agregarEstadistica(0, 1, 90, sistema.traerJugador(234), torneoPlayita.traerPartido(LocalDate.of(2025,1,20), river)); // Juan
+		    torneoPlayita.agregarEstadistica(0, 0, 90, sistema.traerJugador(567), torneoPlayita.traerPartido(LocalDate.of(2025,1,20), river)); // Homero
+		    
+		    System.out.println("Estadísticas agregadas correctamente");
+		} catch (Exception e) {
+		    System.out.println("Error al agregar estadísticas: " + e.getMessage());
+		}
+		
+		
+		
+		 System.out.println("\n\t******** 12. Probar calcularTotalGoles ********");
+		try {
+		    Jugador daira = sistema.traerJugador(123);
+		    Jugador diego = sistema.traerJugador(901);
+		    Jugador pepe = sistema.traerJugador(345);
+		    
+		    System.out.println("Total goles de Daira: " + torneoPlayita.calcularTotalGoles(daira));
+		    System.out.println("Total goles de Diego: " + torneoPlayita.calcularTotalGoles(diego)); 
+		    System.out.println("Total goles de Pepe: " + torneoPlayita.calcularTotalGoles(pepe)); 
+		} catch (Exception e) {
+		    System.out.println("Error en calcularTotalGoles: " + e.getMessage());
+		}
+	 
+	
+		
+
+		System.out.println("\n\t******** 13. Probar calcularTotalAsistencias ********");
+		try {
+		    Jugador daira = sistema.traerJugador(123);
+		    Jugador diego = sistema.traerJugador(901);
+		    Jugador pepe = sistema.traerJugador(345);
+		    
+		    System.out.println("Total asistencias de Daira: " + torneoPlayita.calcularTotalAsistencias(daira));
+		    System.out.println("Total asistencias de Diego: " + torneoPlayita.calcularTotalAsistencias(diego)); 
+		    System.out.println("Total asistencias de Pepe: " + torneoPlayita.calcularTotalAsistencias(pepe)); 
+		} catch (Exception e) {
+		    System.out.println("Error en calcularTotalAsistencias: " + e.getMessage());
+		}
+		
+		
+		
+		 System.out.println("\n\t******** 14. Probar crearTablaGoleadores ********");
+		try {
+		    System.out.println("=== TABLA DE GOLEADORES ===");
+		    List<Goleador> tabla = torneoPlayita.crearTablaGoleadores();
+		    
+		    for (Goleador g : tabla) {
+		        System.out.println(g.getJugador().getNombre() + " " + g.getJugador().getApellido() + 
+		                           ": " + g.getCantGoles() + " goles");
+		    }
+		} catch (Exception e) {
+		    System.out.println("Error en crearTablaGoleadores: " + e.getMessage());
+		}
+		
+		 
+		
+
+		System.out.println("\n\t******** 15. Probar crearTablaAsistidores ********");
+		try {
+		    System.out.println("=== TABLA DE ASISTIDORES ===");
+		    List<Asistidor> tabla = torneoPlayita.crearTablaAsistidores();
+		    
+		    for (Asistidor a : tabla) {
+		        System.out.println(a.getJugador().getNombre() + " " + a.getJugador().getApellido() + 
+		                           ": " + a.getCantAsistencias() + " asistencias");
+		    }
+		} catch (Exception e) {
+		    System.out.println("Error en crearTablaAsistidores: " + e.getMessage());
+		}
+		
 		
 	}
 

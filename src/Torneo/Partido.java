@@ -70,7 +70,9 @@ public class Partido {
 
 
 	public boolean equals(Partido partido) {
-		return partido.equals(this);
+		
+		return (partido.getFecha().isEqual(this.fecha) && partido.getEstadio().equals(this.estadio));
+		
 	}
 	
 	public Equipo getGanador() {

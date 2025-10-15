@@ -3,12 +3,14 @@ package Torneo;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Torneo {
 	private int id;
 	private String nombre;
 	private String temporada;
 	private List<Partido> lstPartidos; //partidos que se jugaron en el torneo
+	private List<Estadistica> lstEstadisticas;
 	private LocalDate fechInicio;
 	private LocalDate fechaFinal;
 	
@@ -22,6 +24,7 @@ public class Torneo {
 		this.fechaFinal = fechaFinal;
 		
 		this.lstPartidos = new ArrayList<Partido>();
+		this.lstEstadisticas = new ArrayList<Estadistica>();
 	}
 
 
@@ -46,6 +49,10 @@ public class Torneo {
 	
 	public List<Partido> getlstPartido() {
 		return lstPartidos;
+	}
+	
+	public List<Estadistica> getlstEstadisticas() {
+		return lstEstadisticas;
 	}
 
 
@@ -125,6 +132,33 @@ public class Torneo {
 		}
 	}
 	
+	
+	public boolean agregarEstadistica(int cantidadGoles, int asistencias, int minJugadores, Jugador jugador, Partido partido) throws Exception {
+		int i = 0;
+		boolean found = false;
+		
+		while(i<lstEstadisticas.size() && !found) {
+			
+			 if(lstEstadisticas.get(i).getPartido().equals(partido) 
+					 && lstEstadisticas.get(i).getJugador().equals(jugador)) {
+				 
+				 found = true;
+				 
+			 }
+			 i++;
+		}
+			 
+			 
+			 if(!found) {
+				 
+				 return lstEstadisticas.add(new Estadistica(cantidadGoles, asistencias, minJugadores, jugador, partido));
+				 
+			 }else {throw new Exception("ya existe la estadistica del jugador para este partido");  }
+			
+			
+			
+	}
+	
 	public Partido traerPartido(LocalDate fecha, Estadio estadio) {
 		int i = 0;
 		boolean found = false;
@@ -183,7 +217,145 @@ public class Torneo {
 			
 			return equipoConMasAltura;
 		}
+		
+		
+		
+		public int calcularTotalGoles(Jugador jugador) {
+			
+			 if (jugador == null) {
+				        return 0;
+				    }
+				
+				int golesTotales = 0;
+				
+				for(Estadistica e : this.getlstEstadisticas()) {
+					
+					if(e.getJugador().equals(jugador)) {
+						
+						golesTotales += e.getCantidadGoles() ;
+						
+					}	
+					
+				}
+				
+				
+				return golesTotales;
+			}
 
 
+		public int calcularTotalAsistencias(Jugador jugador) {
+			
+		 if (jugador == null) {
+			        return 0;
+			    }
+			
+			int asistenciasTotales = 0;
+			
+			for(Estadistica e : this.getlstEstadisticas()) {
+				
+				if(e.getJugador().equals(jugador)) {
+					
+					asistenciasTotales += e.getAsistencias() ;
+					
+				}	
+				
+			}
+			
+			
+			return asistenciasTotales;
+		}
+		
+		
+		
+		
+public List<Goleador> crearTablaGoleadores(){
+			
+			List<Goleador> tablaGoleadores = new ArrayList<Goleador>();
+			List<Jugador> listaJugadores = new ArrayList<Jugador>();
+			
+			
+			//for para guardar a todos los jugadores en una lista
+			for(Partido p : this.lstPartidos ) {
+				
+				for(Jugador j : p.getLocal().getListaJugadores()) {
+					
+					if(!listaJugadores.contains(j)) {
+						
+						listaJugadores.add(j);
+					}
+				}
+				
+				for(Jugador j : p.getVisitante().getListaJugadores()) {
+					
+					if(!listaJugadores.contains(j)) {
+						
+						listaJugadores.add(j);
+					}
+					
+				}
+			}
+			
+			
+			//agregando a los Goleadores a la lista
+			for(Jugador j : listaJugadores) {
+				
+				tablaGoleadores.add(new Goleador(j, calcularTotalGoles(j)));
+				
+			}
+			
+			
+			//ordenamiento
+			
+			tablaGoleadores.sort(Comparator.comparingInt(Goleador::getCantGoles).reversed());
+			
+			
+			return tablaGoleadores;
+			
+		}
+		
 	
+		public List<Asistidor> crearTablaAsistidores(){
+			
+			List<Asistidor> tablaAsistidores = new ArrayList<Asistidor>();
+			List<Jugador> listaJugadores = new ArrayList<Jugador>();
+			
+			
+			//for para guardar a todos los jugadores en una lista
+			for(Partido p : this.lstPartidos ) {
+				
+				for(Jugador j : p.getLocal().getListaJugadores()) {
+					
+					if(!listaJugadores.contains(j)) {
+						
+						listaJugadores.add(j);
+					}
+				}
+				
+				for(Jugador j : p.getVisitante().getListaJugadores()) {
+					
+					if(!listaJugadores.contains(j)) {
+						
+						listaJugadores.add(j);
+					}
+					
+				}
+			}
+			
+			
+			//agregando a los asistidores a la lista
+			for(Jugador j : listaJugadores) {
+				
+				tablaAsistidores.add(new Asistidor(j, calcularTotalAsistencias(j)));
+				
+			}
+			
+			
+			//ordenamiento
+			
+			tablaAsistidores.sort(Comparator.comparingInt(Asistidor::getCantAsistencias).reversed());
+			
+			
+			return tablaAsistidores;
+			
+		}
 }

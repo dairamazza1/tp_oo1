@@ -3,16 +3,18 @@ package Torneo;
 import java.time.LocalDate;
 
 public class Persona {
-	private int dni;
-	private String apellido;
-	private String nombre;
-	private LocalDate fechaDeNacimiento;
+	protected int dni;
+	protected String apellido;
+	protected String nombre;
+	protected LocalDate fechaDeNacimiento;
+	
 	public Persona(int dni, String apellido, String nombre, LocalDate fechaDeNacimiento) {
 		this.dni = dni;
 		this.apellido = apellido;
 		this.nombre = nombre;
 		this.fechaDeNacimiento = fechaDeNacimiento;
 	}
+	
 	public int getDni() {
 		return dni;
 	}
